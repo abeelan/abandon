@@ -1,0 +1,29 @@
+[tool.poetry]
+name = "abandon"
+version = "0.1.0"
+description = ""
+authors = ["lan <lanzy.nice@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+loguru = "^0.7.2"
+fastapi = "^0.109.1"
+sqlalchemy = "^2.0.25"
+pymysql = "^1.1.0"
+mysql-connector = "^2.2.9"
+mysql-connector-python = "^8.3.0"
+aiomysql = "^0.2.0"
+datetime = "^5.4"
+mysql = "^0.0.3"
+mysqlclient = "^2.2.3"
+uvicorn = "^0.27.0.post1"
+pydantic = "^2.6.0"
+ruff = "^0.2.0"
+dynaconf = "^3.2.4"
+pyjwt = "^2.8.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
