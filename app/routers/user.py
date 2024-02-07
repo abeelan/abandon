@@ -1,10 +1,7 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter
 
 from app.dao.user import UserDao
-
-# from app.handler.response import Response
 from app.schemas.user import UserLoginSchema, UserRegisterSchema
-from app.utils.log import log
 
 
 router = APIRouter(prefix="/user")
@@ -51,9 +48,9 @@ async def login(user: UserLoginSchema):
 
 
 @router.post("/reset-password")
-async def reset_password(login: UserLoginSchema):
+async def reset_password(user: UserLoginSchema):
     try:
-        user = await dao.reset_password(login)
+        user = await dao.reset_password(user)
         return {"user": user.username, "msg": "修改成功"}
     except Exception as e:
         return {"success": False, "msg": str(e)}

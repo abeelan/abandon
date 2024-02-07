@@ -4,11 +4,9 @@ user dao
 from typing import List
 from datetime import datetime
 from sqlalchemy.future import select
-from sqlalchemy import update, or_, and_
+from sqlalchemy import update, and_
 
 from app.middleware.auth import JWTAuth
-from app.utils.log import log
-from app.models import async_session
 from app.models.user import User
 from app.dao import BaseDao
 
@@ -62,7 +60,7 @@ class UserDao(BaseDao):
         condition = and_(
             self.model.username == login.username,
             self.model.password == pwd,
-            self.model.deleted_at == 0
+            self.model.deleted_at == 0,
         )
 
         query = select(self.model).where(condition)

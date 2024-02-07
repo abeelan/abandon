@@ -13,7 +13,7 @@ class BaseDao:
     model = None  # 在子类中定义具体的模型类
 
     async def create(self, instance: TableModel = None, **kwargs):
-        """向表格插入数据，支持直接传入 DBModel 或 dict"""
+        """向表格插入数据，支持直接传入 Base 或 dict"""
         async with self.session() as session:
             if instance is None:
                 instance = self.model(**kwargs)

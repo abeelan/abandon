@@ -16,7 +16,6 @@ from sqlalchemy.ext.asyncio import (
     async_scoped_session,
     AsyncSession,
     async_sessionmaker,
-    AsyncEngine,
 )
 from sqlalchemy.exc import ProgrammingError, OperationalError
 
@@ -124,7 +123,7 @@ class DatabaseHelper:
             conn = engine.connect()
         except ProgrammingError:
             # 不存在则创建
-            log.debug(f"初始化数据库: 🌐新建数据库中...")
+            log.debug("初始化数据库: 🌐新建数据库中...")
             engine = create_engine(
                 self.db_url.replace(self.config.DATABASE, ""),
                 echo=False,  # 打印 sql 语句
@@ -148,7 +147,7 @@ class DatabaseHelper:
                 # 通过执行一个简单的 SQL 查询来检查数据库是否存在
                 await session.execute("SELECT 1")
         except (OperationalError, ProgrammingError):
-            log.debug(f"初始化数据库: 🌐新建数据库中...")
+            log.debug("初始化数据库: 🌐新建数据库中...")
             async with self.async_session() as session:
                 await session.execute(
                     text(
@@ -164,7 +163,7 @@ class DatabaseHelper:
     async def init_tables(self):
         async with self.async_engine.begin() as conn:
             await conn.run_sync(Base.metadata.create_all)
-            log.debug(f"初始化数据库: ✅所有表初始化完成 ~")
+            log.debug("初始化数据库: ✅所有表初始化完成 ~")
 
     @staticmethod
     async def connection_test(session: sessionmaker):

@@ -1,7 +1,6 @@
 import sys
 
 import uvicorn
-from loguru import logger
 from fastapi import FastAPI
 
 from app.models import db_helper

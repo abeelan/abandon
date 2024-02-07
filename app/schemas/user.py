@@ -3,11 +3,9 @@
 @Author  : lan
 @DESC    : 
 """
-from datetime import datetime
 from typing import Optional
 
-from pydantic import BaseModel, constr, Field, ValidationError, validator, field_validator
-from pydantic.v1 import root_validator
+from pydantic import BaseModel, constr, field_validator
 
 
 class ParamsError(ValueError):
@@ -28,7 +26,7 @@ class UserLoginSchema(BaseModel):
     password: constr(max_length=20)
 
     @classmethod
-    @field_validator('username', 'password')
+    @field_validator("username", "password")
     def not_empty(cls, value: str) -> str:
         # TODO: 为空校验，返回到接口的异常信息里面，不知道为啥不生效！？
         # https://docs.pydantic.dev/latest/concepts/validators/
