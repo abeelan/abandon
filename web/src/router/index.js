@@ -6,10 +6,14 @@ import {
 
 // 1. 定义路由组件
 import Index from "~/pages/index.vue"
+import Login from "~/pages/login.vue"
+import NotFound from "~/pages/404.vue"
 
 // 2. 定义一些路由
 const routes = [
-    {path: "/", component: Index}
+    {path: "/", component: Index},
+    {path: "/login", component: Login},
+    {path: "/:pathMatch(.*)*", name: "NoutFound", component: NotFound},
 ]
 
 // 3. 创建路由实例并传递 `routes` 配置

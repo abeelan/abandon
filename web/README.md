@@ -80,6 +80,7 @@ $ yarn dev
 
 - volar：vue 文件的语法提示及高亮
 - Vue 3 Snippets 语法提示
+- ESLint 代码保存后自动格式化
 
 
 
@@ -89,7 +90,10 @@ $ yarn dev
 $ yarn add element-plus
 
 # 自动导入插件
-yarn add -D unplugin-vue-components unplugin-auto-import
+$ yarn add -D unplugin-vue-components unplugin-auto-import
+
+# 安装图标库
+$ yarn add @element-plus/icons-vue
 ```
 
 ### windicss
