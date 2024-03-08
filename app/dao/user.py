@@ -75,7 +75,10 @@ class UserDao(BaseDao):
         await self.update(sql)
 
         user_info = UserInfoSchema(**user.__dict__)
-        return user_info.dict()
+        user_dict = user_info.dict()
+        token = self.jwt.generate_token(user_dict)
+        user_dict["token"] = token
+        return user_dict
 
     async def reset_password(self, login: UserLoginSchema):
         if await self.user_exists(login.username) is False:

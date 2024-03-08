@@ -5,9 +5,9 @@
 from pathlib import Path
 from dynaconf import Dynaconf
 
+
 # 根目录
 ROOT_DIR = Path(__file__).parent
-print(ROOT_DIR)
 
 # 加载配置
 settings = Dynaconf(
@@ -21,3 +21,24 @@ settings = Dynaconf(
     # 加载 .env 文件
     load_dotenv=True,
 )
+
+
+LOGO_STR = """
+
+ ▄▄▄       ▄▄▄▄    ▄▄▄       ███▄    █ ▓█████▄  ▒█████   ███▄    █ 
+▒████▄    ▓█████▄ ▒████▄     ██ ▀█   █ ▒██▀ ██▌▒██▒  ██▒ ██ ▀█   █ 
+▒██  ▀█▄  ▒██▒ ▄██▒██  ▀█▄  ▓██  ▀█ ██▒░██   █▌▒██░  ██▒▓██  ▀█ ██▒
+░██▄▄▄▄██ ▒██░█▀  ░██▄▄▄▄██ ▓██▒  ▐▌██▒░▓█▄   ▌▒██   ██░▓██▒  ▐▌██▒
+ ▓█   ▓██▒░▓█  ▀█▓ ▓█   ▓██▒▒██░   ▓██░░▒████▓ ░ ████▓▒░▒██░   ▓██░
+ ▒▒   ▓▒█░░▒▓███▀▒ ▒▒   ▓▒█░░ ▒░   ▒ ▒  ▒▒▓  ▒ ░ ▒░▒░▒░ ░ ▒░   ▒ ▒ 
+  ▒   ▒▒ ░▒░▒   ░   ▒   ▒▒ ░░ ░░   ░ ▒░ ░ ▒  ▒   ░ ▒ ▒░ ░ ░░   ░ ▒░
+  ░   ▒    ░    ░   ░   ▒      ░   ░ ░  ░ ░  ░ ░ ░ ░ ▒     ░   ░ ░ 
+      ░  ░ ░            ░  ░         ░    ░        ░ ░           ░ 
+                ░                       ░                          
+"""
+
+
+if __name__ == '__main__':
+    assert settings.MYSQL.HOST == "127.0.0.1"
+    assert settings.MYSQL.USERNAME == "root"
+    assert settings.MYSQL.DATABASE == "abandon"

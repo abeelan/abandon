@@ -22,6 +22,9 @@ pydantic = "^2.6.0"
 ruff = "^0.2.0"
 dynaconf = "^3.2.4"
 pyjwt = "^2.8.0"
+requests = "^2.31.0"
+aiohttp = "^3.9.3"
+fastapi-users = "^12.1.3"
 
 
 [build-system]

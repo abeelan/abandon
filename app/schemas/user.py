@@ -3,13 +3,26 @@
 @Author  : lan
 @DESC    : 
 """
-from typing import Optional
+from typing import Optional, Annotated
 
-from pydantic import BaseModel, constr, field_validator
+from pydantic import BaseModel, constr, AfterValidator
 
 
 class ParamsError(ValueError):
     pass
+
+
+def validate_username_or_password(value: str):
+    value_stripped = value.strip()
+    value_length = len(value_stripped)
+
+    if not value_stripped:
+        raise ValueError("用户名或密码不能为空")
+    elif value_length < 5:
+        raise ValueError("用户名或密码不能少于 5 位")
+    elif value_length > 20:
+        raise ValueError("用户名或密码不能超过 20 位")
+    return value_stripped
 
 
 class UserInfoSchema(BaseModel):
@@ -18,21 +31,12 @@ class UserInfoSchema(BaseModel):
     email: Optional[constr(max_length=30)] = None
     phone: Optional[constr(max_length=15)] = None
     avatar: Optional[str] = None
-    role: int
+    role: int = 1
 
 
 class UserLoginSchema(BaseModel):
-    username: constr(max_length=20)
-    password: constr(max_length=20)
-
-    @classmethod
-    @field_validator("username", "password")
-    def not_empty(cls, value: str) -> str:
-        # TODO: 为空校验，返回到接口的异常信息里面，不知道为啥不生效！？
-        # https://docs.pydantic.dev/latest/concepts/validators/
-        if len(value.strip()) == 0:
-            raise ValueError("用户名或密码不能为空")
-        return value
+    username: Annotated[str, AfterValidator(validate_username_or_password)]
+    password: Annotated[str, AfterValidator(validate_username_or_password)]
 
 
 class UserRegisterSchema(UserInfoSchema, UserLoginSchema):

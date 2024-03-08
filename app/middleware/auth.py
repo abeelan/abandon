@@ -43,11 +43,11 @@ if __name__ == "__main__":
 
     # 生成令牌
     token_payload = {"user_id": 123, "username": "example"}
-    token = jwt_auth.generate_token(token_payload)
-    print("Generated token:", token)
+    t = jwt_auth.generate_token(token_payload)
+    print("Generated token:", t)
 
     # 解码令牌
-    decoded_payload = jwt_auth.decode_token(token)
+    decoded_payload = jwt_auth.decode_token(t)
     print("Decoded payload:", decoded_payload)
 
     print(jwt_auth.add_salt("test"))

@@ -23,7 +23,7 @@ from config import settings
 from app.utils.log import log
 
 
-class CommonBase:
+class SetBaseTableName:
     """
     https://docs.sqlalchemy.org/en/13/orm/extensions/declarative/mixins.html
     """
@@ -38,9 +38,8 @@ class CommonBase:
         return cls.__name__.lower()
 
 
-class Base(DeclarativeBase, CommonBase):
+class Base(DeclarativeBase, SetBaseTableName):
     """数据模型 基类"""
-
     pass
 
 
@@ -137,9 +136,7 @@ class DatabaseHelper:
             conn.execute(sql)
         else:
             engine.dispose()
-            log.debug(
-                f"初始化数据库: ✅初始化完成「{self.config.DATABASE}」, 关闭连接。"
-            )
+            log.debug(f"初始化数据库: ✅初始化完成「{self.config.DATABASE}」, 关闭连接。")
 
     async def init_database_async(self):
         try:

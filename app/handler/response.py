@@ -12,7 +12,7 @@ from typing import Any
 from starlette.background import BackgroundTask
 from starlette.responses import FileResponse
 
-from app.handler.encoder import jsonable_encoder
+# from app.handler.encoder import jsonable_encoder
 from app.models.user import User
 
 
@@ -79,13 +79,13 @@ class Response:
             columns = list(arr[0].keys())
         return columns, [cls.json_serialize(obj) for obj in arr]
 
-    @classmethod
-    def encode_json(cls, data: Any, *exclude: str):
-        return jsonable_encoder(
-            data,
-            exclude=exclude,
-            custom_encoder={datetime: lambda x: x.strftime("%Y-%m-%d %H:%M:%S")},
-        )
+    # @classmethod
+    # def encode_json(cls, data: Any, *exclude: str):
+    #     return jsonable_encoder(
+    #         data,
+    #         exclude=exclude,
+    #         custom_encoder={datetime: lambda x: x.strftime("%Y-%m-%d %H:%M:%S")},
+    #     )
 
     @classmethod
     def base_resp(cls, code: int, msg: str, data):
